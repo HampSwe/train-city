@@ -1,7 +1,8 @@
 # train-city
-This is a transit diagram of the fictional city "Train City". Daily, the members of "tåget" (a student group at LTH) vote on a new location to add. The new location is then, courtesy of the TågMeister, beautifully added to a vector image of the transit diagram. This repository aims to bring that vector image to life.
+This is a transit diagram of the fictional city "Train City". Every day, the members of "tåget" (a student group at LTH) vote on a new location to add. The new location is then, courtesy of the TågMeister, beautifully added to a vector image of the transit diagram. This repository aims to bring that vector image to life.
 
 ![alt text](https://github.com/HampSwe/train-city/blob/main/images/07-10-22.jpeg "Latest version of Train City")
+
 
 The project uses a library called "PixelWindow". This is bad for two reasons:
 
