@@ -7,6 +7,7 @@ This is a transit diagram of the fictional city "Train City". Every day, the mem
 The project uses a library called "PixelWindow". This is bad for two reasons:
 
 (1) It defeats one of the core principles of transit diagrams: they should be in a vector format. PixelWindow, as the name suggests, does not support vector images.
+
 (2) The library is very inefficient.
 
 But, we use it anyways.
