@@ -1,5 +1,7 @@
 /**
-  * This file handles the game graphics.
+  * This file handles the game's graphics.
+  * 
+  * All graphical operations are performed on a CityWindow.
   * 
   * Read more about the package "PixelWindow" here:
   * https://fileadmin.cs.lth.se/pgk/api/api/introprog/PixelWindow.html
@@ -20,16 +22,18 @@ object Graphics:
         val background = new JColor(255, 255, 255)
         val foreground = new JColor(0, 0, 0)
 
+
+/* This class performs all the graphical operations on a CityWindow */
 class Graphics(
-    val windowTitle: String, /* The title of the window */
-    val width: Int, /* The width of the window in px */
-    val height: Int, /* The height of the window in px */
+    val cityWindow: CityWindow
     ):
 
     import Graphics.*
     import introprog.PixelWindow
 
-    val pixelWindow = new PixelWindow(width, height, windowTitle, Colors.background, Colors.foreground)
+    // Gets a reference to the pixelWindow that is attached to the given cityWindow.
+    val pixelWindow = cityWindow.pixelWindow
 
+    /* Initializes the world */
     def drawWorld(): Unit =
         pixelWindow.fill(10, 10, 100, 100, Colors.green)

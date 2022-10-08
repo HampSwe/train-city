@@ -18,9 +18,14 @@ class Game:
     def start(printStartMsg: Boolean = true): Unit =
         if printStartMsg then startMessage()
 
-        // Creates an instance, g, of the Graphics class. The instance is used to perform all screen operations.
-        val g = new Graphics(title, width, height)
-        g.drawWorld()
+        // Creates an instance of the CityWindow class
+        val cityWindow = new CityWindow(title, width, height) 
+
+        // Creates an instance, graphics, of the Graphics class. The instance is used to perform all screen operations on the cityWindow.
+        val graphics = new Graphics(cityWindow)
+
+        graphics.drawWorld()
+
     
     /* Procedure that prints the start message to the screen */
     def startMessage(): Unit = println(s"${title} started.")
