@@ -5,6 +5,7 @@ This is a transit diagram of the fictional city "Train City". Every day, the mem
 
 ![alt text](https://github.com/HampSwe/train-city/blob/main/images/07-10-22.jpeg "Latest version of Train City")
 
+
 ## Details
 The project uses a library called "PixelWindow". This is bad for two reasons:
 
