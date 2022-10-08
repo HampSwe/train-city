@@ -8,10 +8,17 @@ import java.beans.EventHandler
 
 /* Declares and initializes some constant variables containing info about the game */
 object Game:
-    val title: String = "Train City" /* The title of the game */
-    val width: Int = 1000 /*The width of the window in px*/
-    val aspectRatio: Double = 0.7153 /* aspectRatio represents the value of (height / width) */
-    val height: Int = (width * aspectRatio).round.toInt /*Calculates the height of the window in px*/
+     /* The title of the game */
+    val title: String = "Train City"
+
+    /*The width of the game's window in pixels*/
+    val width: Int = 1000
+
+    /* aspectRatio represents the value of the window's (height / width) */
+    val aspectRatio: Double = 0.7153
+
+    /*Calculates the height of the window in pixels*/
+    val height: Int = (width * aspectRatio).round.toInt
 
 class Game:
     import Game.*
