@@ -1,3 +1,7 @@
+/**
+  * This file contains the main function.
+  */
+
 //> using scala "3.1.3"
 //> using lib "se.lth.cs::introprog:1.3.1"
 
