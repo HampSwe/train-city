@@ -1,10 +1,13 @@
 /**
   * This file handles the game's main window.
   * 
-  * Essentially, the "CityWindow" works like a wrapper around "PixelWindow".
-  * It is called "CityWindow", so that it isn't confused with a "PixelWindow".
+  * Essentially, a "CityWindow" works like a wrapper around a "PixelWindow".
+  * It is called "CityWindow" so that it isn't confused with a "PixelWindow".
   * 
   * Upon construction, a "PixelWindow" is instatiated and a reference to it is stored as "pixelWindow".
+  * 
+  * The classes "Graphics" and "InputHandler" both take a "CityWindow" object as a parameter, and they
+  * are the only classes that perform operations on the PixelWindow object that is attached to every CityWindow object.
   * 
   * Read more about the package "PixelWindow" here:
   * https://fileadmin.cs.lth.se/pgk/api/api/introprog/PixelWindow.html

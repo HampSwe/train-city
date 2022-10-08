@@ -1,7 +1,7 @@
 /**
   * This file handles the game's graphics.
   * 
-  * All graphical operations are performed on a CityWindow.
+  * All graphical operations are performed on a CityWindow object.
   * 
   * Read more about the package "PixelWindow" here:
   * https://fileadmin.cs.lth.se/pgk/api/api/introprog/PixelWindow.html
