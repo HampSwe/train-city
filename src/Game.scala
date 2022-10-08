@@ -4,8 +4,6 @@
 
 package traincity
 
-import java.beans.EventHandler
-
 /** Declares and initializes some constant variables containing info about the game */
 object Game:
      /** The title of the game */
