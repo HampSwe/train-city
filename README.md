@@ -18,4 +18,4 @@ But, we use it anyways.
 
 The project was inspired by https://www.reddit.com/r/TransitDiagrams/.
 
-Feel free to contribute in any shape or form.
+Feel free to contribute in any shape or form!
