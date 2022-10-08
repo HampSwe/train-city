@@ -2,7 +2,7 @@
   * This file handles the game's main window.
   * 
   * Essentially, a "CityWindow" works like a wrapper around a "PixelWindow".
-  * It is called "CityWindow" so that it isn't confused with a "PixelWindow".
+  * This layer of abstraction could seem unnecessary at the moment, but it might become useful in the future.
   * 
   * Upon construction, a "PixelWindow" is instatiated and a reference to it is stored as "pixelWindow".
   * 
