@@ -3,7 +3,6 @@
   * 
   * Read more about the package "PixelWindow" here:
   * https://fileadmin.cs.lth.se/pgk/api/api/introprog/PixelWindow.html
-  * 
   */
 
 package traincity
@@ -31,3 +30,6 @@ class Graphics(
     import introprog.PixelWindow
 
     val pixelWindow = new PixelWindow(width, height, windowTitle, Colors.background, Colors.foreground)
+
+    def drawWorld(): Unit =
+        pixelWindow.fill(10, 10, 100, 100, Colors.green)

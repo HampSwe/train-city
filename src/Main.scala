@@ -3,7 +3,6 @@
   * 
   * Read more about the package "PixelWindow" here:
   * https://fileadmin.cs.lth.se/pgk/api/api/introprog/PixelWindow.html
-  * 
   */
 
 //> using scala "3.1.3"
@@ -12,5 +11,7 @@
 package traincity
 
 object Main:
+    /* The main function starts the game */
     def main(args: Array[String]): Unit =
-        println("Hello, World!")
+        val game = new Game()
+        game.start()
