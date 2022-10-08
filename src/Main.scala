@@ -11,7 +11,7 @@
 package traincity
 
 object Main:
-    /* The main function starts the game */
+    /** The main function starts the game */
     def main(args: Array[String]): Unit =
         val game = new Game()
         game.start()

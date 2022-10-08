@@ -6,24 +6,24 @@ package traincity
 
 import java.beans.EventHandler
 
-/* Declares and initializes some constant variables containing info about the game */
+/** Declares and initializes some constant variables containing info about the game */
 object Game:
-     /* The title of the game */
+     /** The title of the game */
     val title: String = "Train City"
 
-    /*The width of the game's window in pixels*/
+    /** The width of the game's window in pixels*/
     val width: Int = 1000
 
-    /* aspectRatio represents the value of the window's (height / width) */
+    /** aspectRatio represents the value of the window's (height / width) */
     val aspectRatio: Double = 0.7153
 
-    /*Calculates the height of the window in pixels*/
+    /** Calculates the height of the window in pixels*/
     val height: Int = (width * aspectRatio).round.toInt
 
 class Game:
     import Game.*
 
-    /* Procedure that starts the game */
+    /** Procedure that starts the game */
     def start(printStartMsg: Boolean = true): Unit =
         if printStartMsg then startMessage()
 
@@ -41,5 +41,5 @@ class Game:
         graphics.drawWorld()
 
     
-    /* Procedure that prints the start message to the screen */
+    /** Procedure that prints the start message to the screen */
     def startMessage(): Unit = println(s"${title} started.")

@@ -20,9 +20,9 @@ object CityWindow:
     ???
 
 class CityWindow(
-    val windowTitle: String, /* The title of the window */
-    val width: Int, /* The width of the window in px */
-    val height: Int, /* The height of the window in px */
+    val windowTitle: String, /** The title of the window */
+    val width: Int, /** The width of the window in px */
+    val height: Int, /** The height of the window in px */
     ):
 
     import CityWindow.*

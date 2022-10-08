@@ -13,7 +13,7 @@ import java.awt.Color as JColor
 object InputHandler:
     ???
 
-/* This class handles all the input events that are triggered by a CityWindow */
+/** This class handles all the input events that are triggered by a CityWindow */
 class InputHandler(
     val cityWindow: CityWindow
     ):
