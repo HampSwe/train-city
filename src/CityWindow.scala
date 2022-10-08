@@ -1,5 +1,5 @@
 /**
-  * This file handles the game window
+  * This file handles the game window.
   * 
   * Read more about the package "PixelWindow" here:
   * https://fileadmin.cs.lth.se/pgk/api/api/introprog/PixelWindow.html
