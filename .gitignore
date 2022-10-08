@@ -1,2 +1,6 @@
 *.class
 *.log
+.bsp
+.metals
+.scala-build
+.vscode
