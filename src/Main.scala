@@ -1,5 +1,9 @@
 /**
   * This file contains the main function.
+  * 
+  * Read more about the package "PixelWindow" here:
+  * https://fileadmin.cs.lth.se/pgk/api/api/introprog/PixelWindow.html
+  * 
   */
 
 //> using scala "3.1.3"
