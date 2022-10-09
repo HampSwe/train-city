@@ -95,7 +95,12 @@ class Graphics(
                 thickLine.draw()
         
         def drawStops(): Unit =
-            println("hej") 
+            val poly: Polygon = new Polygon(Pos(200, 200), 30, 5, this)
+            poly.fill(Colors.black)
+
+            val circle: Circle = new Circle(Pos(200, 500), 8, 1000, this)
+            //circle.draw(Colors.black)
+            circle.fill(Colors.black)
     
         drawBackground()
         drawStops()

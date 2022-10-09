@@ -10,19 +10,73 @@ import java.awt.Color as JColor
 
 /* A Shape trait. All polygons can be drawn and filled */
 trait Shape:
-    def draw(color: JColor): Unit
+    def draw(color: JColor, width: Int = 1): Unit
     def fill(color: JColor): Unit
 
+    // graphics: Graphics should be a field
 
-/** A class that represents an arbitrary polygon */
-case class Polygon(center: Pos, radius: Int, vertices: Int, graphics: Graphics) extends Shape:
+
+/** A class that represents an arbitrary even polygon */
+case class Polygon(start: Pos, var side: Double, vertices: Int, graphics: Graphics) extends Shape:
     val pixelWindow = graphics.pixelWindow
 
-    override def draw(color: JColor): Unit =
+    /** Draws an arbitrary even polygon */
+    override def draw(color: JColor, width: Int = 1): Unit =
+        var turn: Double = (math.Pi * 2) / vertices.toDouble
+        var angle: Double = 0
+        var oldPos: (Double, Double) = (start.x, start.y)
+        var currentPos: (Double, Double) = (start.x, start.y)
 
-        ???
+        for i <- 0 until vertices - 1 do
+            currentPos = (oldPos(0) + math.cos(angle) * side, oldPos(1) + math.sin(angle) * side)
+            pixelWindow.line(oldPos(0).round.toInt, oldPos(1).round.toInt, currentPos(0).round.toInt, currentPos(1).round.toInt, color, width)
+            angle -= turn
+            oldPos = currentPos
 
-    override def fill(color: JColor): Unit = ???
+        pixelWindow.line(oldPos(0).round.toInt, oldPos(1).round.toInt, start.x, start.y, color, width)
+
+
+    /** Fills an arbitrary even polygon */
+    override def fill(color: JColor): Unit =
+        val oldSide = side
+        var tmpSide = oldSide.toDouble
+        val precision = 1
+        val width = 3
+
+        for i <- 1 to (side * precision).toInt do
+            this.draw(color, width = width)
+            tmpSide -= 1D / precision.toDouble
+            side = tmpSide.round.toInt
+        side = oldSide
+
+
+
+/** A case class that represents a circle */
+case class Circle(center: Pos, var radius: Double, edges: Int = 100, graphics: Graphics) extends Shape:
+    val pixelWindow = graphics.pixelWindow
+
+    /** Draws a circle */
+    override def draw(color: JColor, width: Int = 1): Unit =
+        var turn: Double = (math.Pi * 2) / edges.toDouble
+        var angle: Double = 0
+        var currentPos: (Double, Double) = (center.x + radius, center.y)
+        var nextPos: (Double, Double) = (center.x + radius, center.y)
+
+        for i <- 0 to edges do
+            nextPos = (center.x + math.cos(angle) * radius, center.y + math.sin(angle) * radius)
+            pixelWindow.line(currentPos(0).round.toInt, currentPos(1).round.toInt, nextPos(0).round.toInt, nextPos(1).round.toInt, color, width)
+            angle -= turn
+            currentPos = nextPos
+
+    /** Fills a circle */
+    override def fill(color: JColor): Unit =
+        val oldRadius = radius
+        val width = 2
+
+        for i <- 1 to radius.toInt do
+            this.draw(color, width = width)
+            radius -= 1
+        radius = oldRadius
 
 
 /** A class that represents a 2D Triangle */
@@ -30,10 +84,10 @@ case class Triangle(p1: Pos, p2: Pos, p3: Pos, graphics: Graphics) extends Shape
     val pixelWindow = graphics.pixelWindow
 
     /** Draws the triangle on the screen */
-    override def draw(color: JColor): Unit =
-        pixelWindow.line(p1.x, p1.y, p2.x, p2.y, color)
-        pixelWindow.line(p2.x, p2.y, p3.x, p3.y, color)
-        pixelWindow.line(p3.x, p3.y, p1.x, p1.y, color)
+    override def draw(color: JColor, width: Int = 1): Unit =
+        pixelWindow.line(p1.x, p1.y, p2.x, p2.y, color, width)
+        pixelWindow.line(p2.x, p2.y, p3.x, p3.y, color, width)
+        pixelWindow.line(p3.x, p3.y, p1.x, p1.y, color, width)
 
     /** Fills the triangle fast, but is inaccurate */
     def fillTriangleFast(color: JColor, multiplier: Int = 10): Unit =
@@ -47,7 +101,7 @@ case class Triangle(p1: Pos, p2: Pos, p3: Pos, graphics: Graphics) extends Shape
         def y(t: Double): Int = (p3.y - deltaY * (t / n)).round.toInt
         
         for t <- range do
-            pixelWindow.line(p1.x, p1.y, x(t), y(t))
+            pixelWindow.line(p1.x, p1.y, x(t), y(t), color)
 
     /** Fills the triangle accurately, but is slow */
     def fillTriangleExact(color: JColor): Unit =
