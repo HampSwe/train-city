@@ -1,5 +1,5 @@
 /**
-  * This file handles representations of polygons.
+  * This file handles representations of shapes.
   * 
   * Read more about the package "PixelWindow" here:
   * https://fileadmin.cs.lth.se/pgk/api/api/introprog/PixelWindow.html
@@ -8,14 +8,14 @@
 package traincity
 import java.awt.Color as JColor
 
-/* A Polygon trait. All polygons can be drawn and filled */
-trait Polygon:
+/* A Shape trait. All polygons can be drawn and filled */
+trait Shape:
     def draw(color: JColor): Unit
     def fill(color: JColor): Unit
 
 
 /** A class that represents a 2D Triangle */
-case class Triangle(p1: Pos, p2: Pos, p3: Pos, graphics: Graphics) extends Polygon:
+case class Triangle(p1: Pos, p2: Pos, p3: Pos, graphics: Graphics) extends Shape:
     val pixelWindow = graphics.pixelWindow
 
     /** Draws the triangle on the screen */

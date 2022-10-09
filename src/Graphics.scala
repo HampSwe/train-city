@@ -83,16 +83,24 @@ class Graphics(
 
     /** Draws the specified MetroLine */
     def drawMetroLine(metroLine: MetroLine): Unit =
-        val edges = metroLine.edges
-        val numberOfEdges = edges.length
-        var thickLine: ThickLine = null
-        var flippedCorner: Boolean = false
+        def drawBackground(): Unit =
+            val edges = metroLine.edges
+            val numberOfEdges = edges.length
+            var thickLine: ThickLine = null
+            var flippedCorner: Boolean = false
 
-        for i <- 0 until numberOfEdges - 2 do
-            flippedCorner = {if metroLine.flippedCorners(i + 1) then true else false}
-            thickLine = new ThickLine(edges(i), edges(i + 1), edges(i + 2), metroLineWidth, this, metroLine.color, flipCorner = flippedCorner)
-            thickLine.draw()
+            for i <- 0 until numberOfEdges - 2 do
+                flippedCorner = {if metroLine.flippedCorners(i + 1) then true else false}
+                thickLine = new ThickLine(edges(i), edges(i + 1), edges(i + 2), metroLineWidth, this, metroLine.color, flipCorner = flippedCorner)
+                thickLine.draw()
+        
+        def drawStops(): Unit =
+            println("hej") 
     
+        drawBackground()
+        drawStops()
+
+
     // This procedure for anti-aliasing is incredibly inefficient and is only used for testing
     def simpleAntiAlias(): Unit =
         // Currently skips the perimeter (which should be supported later)

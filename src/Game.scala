@@ -67,7 +67,6 @@ class Game:
         
         graphics.drawMetroLine(redLine)
 
-
         // Add Singapore
 
 
