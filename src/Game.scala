@@ -36,18 +36,37 @@ class Game:
         //This instance handles all the input events that are triggered by the cityWindow
         val inputHandler = new InputHandler(cityWindow)
 
+        // Draws the river
         graphics.drawWorld()
 
+        // Creates the stations
         val stations: Array[Station] = Array(
-            Station("Parliament", Pos(100, 200), Graphics.Colors.red,
+            new Station("Parliament", Pos(100, 200), Graphics.Colors.red,
                     (-30, 0), 12, Array("red-polygon"), (-10, 0)),
 
-            Station("Anna Book Arena", Pos(600, 600), Graphics.Colors.white,
+            new Station("Anna Book Arena", Pos(600, 600), Graphics.Colors.white,
                     (0, 30), 16, Array("red-polygon", "blue-polygon", "yellow-A"), (-5, 50)),
             
-            Station("Wit's End", Pos(700, 300), Graphics.Colors.blue,
+            new Station("Wit's End", Pos(700, 300), Graphics.Colors.blue,
                     (-30, 0), 12, Array("blue-polygon"), (15, 0)),
         )
+
+        // Creates the stops on the red line
+        val redLineStops: Array[Stop] = Array(
+            new Stop("Weston Road", Pos(200, 300), (0, -10), Graphics.Colors.red),
+            new Stop("Bridge Plaza", Pos(300, 300), (0, 10), Graphics.Colors.red),
+            new Stop("Grand Square", Pos(350, 350), (-20, 0), Graphics.Colors.red),
+            new Stop("Bremerton Alley", Pos(400, 450), (0, -10), Graphics.Colors.red),
+            new Stop("National Museum of Art", Pos(500, 450), (0, 10), Graphics.Colors.red),
+        )
+
+        // Creates the red line
+        val redLine: MetroLine = new MetroLine(stations(0), stations(1),
+                        Array(Pos(100, 300), Pos(300, 300), Pos(400, 400), Pos(500, 400), Pos(550, 450)),
+                        redLineStops, Graphics.Colors.red)
+        
+        
+
 
         // Add Singapore
 
