@@ -6,6 +6,12 @@ This is a transit diagram of the fictional city "Train City". Every day, the mem
 ![alt text](https://github.com/HampSwe/train-city/blob/main/images/jpeg/latest.jpeg "Latest version of Train City")
 
 
+## Execution
+Clone the files to your machine. Go to the src/ directory and run
+```
+scala-cli run .
+``` 
+
 ## Details
 The project uses a library called [PixelWindow](https://fileadmin.cs.lth.se/pgk/api/api/introprog/PixelWindow.html). This is bad for two reasons:
 
