@@ -45,11 +45,13 @@ case class Triangle(p1: Pos, p2: Pos, p3: Pos, graphics: Graphics) extends Polyg
         val xRange = pointsX.reduce(_.min(_)) to pointsX.reduce(_.max(_))
         val yRange = pointsY.reduce(_.min(_)) to pointsY.reduce(_.max(_))
 
+        this.draw(color)
         for x <- xRange do
             for y <- yRange do
                 if this.pointIsInTriangle(Pos(x, y)) then pixelWindow.setPixel(x, y, color)
                 // pixels should not be changed directly (instead, do this in CityWindow to allow scaling and anti-alias)
 
+    /* Sets the default fill procedure to fillTriangleExact*/
     override def fill(color: JColor): Unit = this.fillTriangleExact(color)
 
     // Checks if a point (Pos-object) is inside (or on) a triangle
