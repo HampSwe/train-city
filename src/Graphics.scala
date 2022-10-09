@@ -56,13 +56,18 @@ class Graphics(
 
     /** A procedure that draws the background river */
     def drawRiver(): Unit =
-        val p1 = Pos(100, 100)
-        val p2 = Pos(300, 100)
-        val p3 = Pos(400, 300)
-        val width = 30
+        val width = 28
 
-        val line1 = new ThickLine(p1, p2, p3, width, this, Colors.river, offSet = 0, flipCorner = false)
-        line1.draw()
+        val lines: Array[ThickLine] = Array(
+            new ThickLine(Pos(0, 400), Pos(200, 400), Pos(300, 300), width, this, Colors.river, offSet = 0, flipCorner = false),
+            new ThickLine(Pos(420, 715), Pos(420, 690), Pos(300, 570), width, this, Colors.river, offSet = 0, flipCorner = false),
+            new ThickLine(Pos(420, 690), Pos(300, 570), Pos(300, 300), width, this, Colors.river, offSet = 0, flipCorner = true),
+            new ThickLine(Pos(300, 570), Pos(300, 250), Pos(350, 200), width, this, Colors.river, offSet = 0, flipCorner = true)
+        )
+
+        for i <- 0 until lines.length do
+            lines(i).draw()
+
 
     
     // This procedure is incredibly inefficient and is only used for testing
