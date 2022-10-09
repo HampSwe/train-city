@@ -50,11 +50,13 @@ class Graphics(
         t.fill(Colors.blue)
         */
 
-        val p1 = Pos(400, 400)
-        val p2 = Pos(300, 300)
+        val p1 = Pos(700, 700)
+        val p2 = Pos(600, 300)
         //val p2 = Pos(200, 300)
-        val p3 = Pos(350, 100)
+        val p3 = Pos(200, 400)
         val width = 20
+
+        //val p3 = Pos(100, 700) konstig
 
         val thickLine = new ThickLine(p1, p2, p3, width, this, Colors.black)
         thickLine.draw()
@@ -94,7 +96,6 @@ case class ThickLine(a: Pos, b: Pos, c: Pos, width: Int, graphics: Graphics, col
         val yM: Double = k1 * (xM - p1.x) + p1.y
         */
 
-
         val k1: Double = ((p2.y - p1.y).toDouble / (p2.x - p1.x).toDouble)
         val k2: Double = ((p4.y - p3.y).toDouble / (p4.x - p3.x).toDouble)
         val xM: Double = (p3.y - k2 * p3.x - p1.y + k1 * p1.x).toDouble / (k1 - k2)
@@ -105,26 +106,37 @@ case class ThickLine(a: Pos, b: Pos, c: Pos, width: Int, graphics: Graphics, col
 
         Pos(xM.round.toInt, yM.round.toInt)
     
+    def getOrientation: Int =
+
+        var orientation = 1
+        //orientation *= {if a.x < b.x then 1 else -1}
+        //orientation *= {if c.isLeftOfPlane(a, b) then 1 else -1}
+        //orientation *= {if b.y < c.y && c.x < b.x && b.x < c.x then -1 else 1}
+
+        orientation *= {if c.isLeftOfPlane(a, c) then -1 else 1}
+        orientation *= {if c.y > a.y then 1 else -1}
+
+        orientation
+
+        //orientation *= {if b.x < c.x then 1 else -1}
+        //orientation *= {if b.y > a.y && b.y > c.y then 1 else -1}
+
+        //println("o")
+        //println(orientation)
+        //orientation
+    
     def draw(): Unit =
         // Draws the base
         pixelWindow.line(a.x, a.y, b.x, b.y, color, width)
         pixelWindow.line(b.x, b.y, c.x, c.y, color, width)
 
-        // Fills the gap
-        val k1: Double = ((a.y - b.y) / (a.x - b.x))
-        val k2: Double = ((b.y - c.y) / (b.x - c.x))
-        val hL: Double = k1 * a.x - a.y - k2 * b.x + b.y
-        val xM: Double = hL / (k1 - k2)
-        val yM: Double = k1 * (xM - a.x) + a.y
+        val orientation = getOrientation
 
-        val t = new Triangle(Pos(xM.round.toInt, yM.round.toInt), Pos(0, 0), Pos(0, 900), graphics)
-        //t.draw(Graphics.Colors.red)
-
-        val (h1, h2) = getCorners(a, b, 1)
-        val (q1, q2) = getCorners(b, c, 1) // was -1
-
+        val (h1, h2) = getCorners(a, b, orientation)
+        val (q1, q2) = getCorners(b, c, orientation)
         val intersect: Pos = getIntersectionPoint(h1, h2, q1, q2)
 
+        // Fills the gap
         val t1 = new Triangle(h2, intersect, b, graphics)
         val t2 = new Triangle(q1, intersect, b, graphics)
         t1.fill(Graphics.Colors.red)
