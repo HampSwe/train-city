@@ -5,7 +5,8 @@ This is a document where you can write ideas that you have!
 Ideas:
 
 
-
+Improvements:
+    - PixelWindow should never be called directly: add a wrapper function located in Graphics
 
 Known bugs (that aren't critical):
     - If the turn of a ThickLine is too steep, the extra padding that is added could fall outside of the screen

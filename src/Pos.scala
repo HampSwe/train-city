@@ -16,6 +16,10 @@ object Pos:
         val d3 = distance(p3, p1)
         val alpha = math.acos((d3 * d3 - d1 * d1 - d2 * d2) / (2 * d1 * d2))
         alpha
+    
+    /** Checks if three points are on the same line
+     * Not finished yet. */
+    def pointsOnLine(p1: Pos, p2: Pos, p3: Pos): Boolean = false
 
 /** This class represents a position in the game as two coordinates.
     The coordinates are currently in a 1:1 relationship with the window's pixels*/

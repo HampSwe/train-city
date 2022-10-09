@@ -38,45 +38,75 @@ class Graphics(
 
     /** Initializes the world */
     def drawWorld(): Unit =
-        //pixelWindow.fill(10, 10, 100, 100, Colors.green)
-
-        //drawWideLine(p1, p2, 30, Colors.black)
-        //pixelWindow.line(p1.x, p1.y, p2.x, p2.y, Colors.red)
-
-        /*
-        val t = new Triangle(Pos(10, 10), Pos(10, 300), Pos(500, 50), this)
-        t.draw(Colors.red)
-        Thread.sleep(2000)
-        t.fill(Colors.blue)
-        */
 
         val p1 = Pos(100, 100)
-        val p2 = Pos(300, 300)
-        //val p2 = Pos(200, 300)
-        val p3 = Pos(400, 700)
-        val width = 20
+        val p2 = Pos(300, 100)
+        val p3 = Pos(400, 300)
+        val width = 10
 
-        println(p1.isLeftOfPlane(p3, p2))
+        //val p1 = Pos(100, 100)
+        //val p2 = Pos(200, 200)
+        //val p3 = Pos(500, 200)
+        //val width = 30
 
-        //val p3 = Pos(100, 700) konstig
-
-        val thickLine = new ThickLine(p1, p2, p3, width, this, Colors.black, offSet=1)
+        val thickLine = new ThickLine(p1, p2, p3, width, this, Colors.black, offSet = 0, flipCorner = false)
         thickLine.draw()
 
+        //simpleAntiAlias()
 
     def drawWideLine(p1: Pos, p2: Pos, width: Int, color: JColor): Unit =
         pixelWindow.line(p1.x, p1.y, p2.x, p2.y, color, width)
 
+    
+    // This procedure is incredibly inefficient and is only used for testing
+    def simpleAntiAlias(): Unit =
+        // Currently skips the peremiter (which should be supported later)
+        val xRange = 1 until cityWindow.width - 1
+        val yRange = 1 until cityWindow.height - 1
+        var i = 0
+
+        var pixel: JColor = Colors.white
+        var newColor = Colors.white
+        var leftColor = Colors.white
+        var rightColor = Colors.white
+        var upColor = Colors.white
+        var downColor = Colors.white
+
+        for x <- xRange do
+            for y <- yRange do
+                pixel = pixelWindow.getPixel(x, y)
+                if pixel != Colors.black then
+                    leftColor = pixelWindow.getPixel(x - 1, y)
+                    rightColor = pixelWindow.getPixel(x + 1, y)
+                    upColor = pixelWindow.getPixel(x, y + 1)
+                    downColor = pixelWindow.getPixel(x, y - 1)
+            
+                    newColor = JColor((leftColor.getRed() + rightColor.getRed() + upColor.getRed() + downColor.getRed() + pixel.getRed()) / 5,
+                                    (leftColor.getBlue() + rightColor.getBlue() + upColor.getBlue() + downColor.getBlue() + pixel.getBlue()) / 5,
+                                    (leftColor.getGreen() + rightColor.getGreen() + upColor.getGreen() + downColor.getGreen() + pixel.getGreen()) / 5)
+                    
+                    pixelWindow.setPixel(x, y, newColor)
+
+        println("Finished anti-aliasing")
+
 // Add anti-aliasing!
 
 
+/** This class handles ThickLines - that is, a wide line between three points.
+ * What is special about a ThickLine is that it adds extra "padding" so that
+ * when the line turns, it gets a nice looking edge.
+ * 
+ * If the edge doesn't appear, you can manually set flipCorner to true.
+ * If the edge appears slightly off, you can change offSet to a different value
+*/
 case class ThickLine(a: Pos, b: Pos, c: Pos, width: Int, 
                     graphics: Graphics, color: JColor,
-                    offSet: Int = -1, flipCorner: Boolean = false):
+                    offSet: Int = 0, flipCorner: Boolean = false):
 
     import introprog.PixelWindow
     val pixelWindow = graphics.pixelWindow
 
+    /** Gets two corners of the wide line that goes through p1 and p2 */
     def getCorners(p1: Pos, p2: Pos, orientation: Int): (Pos, Pos) =
         //val alpha = math.atan((p2.y - p1.y) / (p2.x - p1.x))
         //val xDelta = math.sin(alpha) * ((width.toDouble) / 2) * orientation
@@ -119,6 +149,7 @@ case class ThickLine(a: Pos, b: Pos, c: Pos, width: Int,
         orientation *= {if c.y > a.y then 1 else -1}
         orientation
     
+    /* Draws the ThickLine */
     def draw(): Unit =
         // Draws the base
         pixelWindow.line(a.x, a.y, b.x, b.y, color, width)
@@ -129,14 +160,15 @@ case class ThickLine(a: Pos, b: Pos, c: Pos, width: Int,
         val (q1, q2) = getCorners(b, c, orientation)
         val intersect: Pos = getIntersectionPoint(h1, h2, q1, q2)
 
-        // Fills the gap
-        val t1 = new Triangle(h2, intersect, b, graphics)
-        val t2 = new Triangle(q1, intersect, b, graphics)
-        t1.fill(Graphics.Colors.black)
-        t2.fill(Graphics.Colors.black)
+        if !Pos.pointsOnLine(a, b, c) then
+            // Fills the gap with padding
+            val t1 = new Triangle(h2, intersect, b, graphics)
+            val t2 = new Triangle(q1, intersect, b, graphics)
+            t1.fill(color)
+            t2.fill(color)
 
-        //pixelWindow.line(h1.x, h1.y, h2.x, h2.y, Graphics.Colors.red)
-        //pixelWindow.line(q1.x, q1.y, q2.x, q2.y, Graphics.Colors.blue)
+        pixelWindow.line(h1.x, h1.y, h2.x, h2.y, color)
+        pixelWindow.line(q1.x, q1.y, q2.x, q2.y, color)
 
         //pixelWindow.line(h1.x, h1.y, intersect.x, intersect.y, Graphics.Colors.green)
         //pixelWindow.line(intersect.x, intersect.y, q2.x, q2.y, Graphics.Colors.red)
