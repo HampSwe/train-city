@@ -50,15 +50,17 @@ class Graphics(
         t.fill(Colors.blue)
         */
 
-        val p1 = Pos(700, 700)
-        val p2 = Pos(600, 300)
+        val p1 = Pos(100, 100)
+        val p2 = Pos(300, 300)
         //val p2 = Pos(200, 300)
-        val p3 = Pos(200, 400)
+        val p3 = Pos(400, 700)
         val width = 20
+
+        println(p1.isLeftOfPlane(p3, p2))
 
         //val p3 = Pos(100, 700) konstig
 
-        val thickLine = new ThickLine(p1, p2, p3, width, this, Colors.black)
+        val thickLine = new ThickLine(p1, p2, p3, width, this, Colors.black, offSet=1)
         thickLine.draw()
 
 
@@ -68,7 +70,10 @@ class Graphics(
 // Add anti-aliasing!
 
 
-case class ThickLine(a: Pos, b: Pos, c: Pos, width: Int, graphics: Graphics, color: JColor):
+case class ThickLine(a: Pos, b: Pos, c: Pos, width: Int, 
+                    graphics: Graphics, color: JColor,
+                    offSet: Int = -1, flipCorner: Boolean = false):
+
     import introprog.PixelWindow
     val pixelWindow = graphics.pixelWindow
 
@@ -81,49 +86,38 @@ case class ThickLine(a: Pos, b: Pos, c: Pos, width: Int, graphics: Graphics, col
         val xDelta = ((p1.y - p2.y) * width) / (2 * distance) * orientation
         val yDelta = ((p1.x - p2.x) * width) / (2 * distance) * orientation
 
-        val corner1 = Pos((p1.x - xDelta).round.toInt, (p1.y + yDelta).round.toInt)
-        val corner2 = Pos((p2.x - xDelta).round.toInt, (p2.y + yDelta).round.toInt)
+        val corner1 = Pos((p1.x - xDelta).round.toInt - offSet, (p1.y + yDelta).round.toInt)
+        val corner2 = Pos((p2.x - xDelta).round.toInt - offSet, (p2.y + yDelta).round.toInt)
         (corner1, corner2)
     
     /** Gets the point of intersection between the line that goes through p1 and p2
      * and the line that goes through p3 and p4 */
     def getIntersectionPoint(p1: Pos, p2: Pos, p3: Pos, p4: Pos): (Pos) =
-        /*
-        val k1: Double = ((p1.y - p2.y) / (p1.x - p2.x))
-        val k2: Double = ((p3.y - p4.y) / (p3.x - p4.x))
-        val hL: Double = k1 * p1.x - p1.y - k2 * p3.x + p3.y
-        val xM: Double = hL / (k1 - k2)
-        val yM: Double = k1 * (xM - p1.x) + p1.y
-        */
+        if p1.x == p2.x then
+            val xM = p1.x
+            val k2: Double = ((p4.y - p3.y).toDouble / (p4.x - p3.x).toDouble)
+            val yM = xM * k2 + p3.y - k2 * p3.x
+            Pos(xM.round.toInt, yM.round.toInt)
+        
+        else if p4.x == p3.x then
+            val xM: Double = p3.x
+            val k1: Double = ((p2.y - p1.y).toDouble / (p2.x - p1.x).toDouble)
+            val yM: Double = xM * k1 + p1.y - k1 * p1.x
+            Pos(xM.round.toInt, yM.round.toInt)
 
-        val k1: Double = ((p2.y - p1.y).toDouble / (p2.x - p1.x).toDouble)
-        val k2: Double = ((p4.y - p3.y).toDouble / (p4.x - p3.x).toDouble)
-        val xM: Double = (p3.y - k2 * p3.x - p1.y + k1 * p1.x).toDouble / (k1 - k2)
-        val yM: Double = xM * k1 + p1.y - k1*p1.x
-
-        println(k1)
-        println(k2)
-
-        Pos(xM.round.toInt, yM.round.toInt)
+        else
+            val k1: Double = ((p2.y - p1.y).toDouble / (p2.x - p1.x).toDouble)
+            val k2: Double = ((p4.y - p3.y).toDouble / (p4.x - p3.x).toDouble)
+            val xM: Double = (p3.y - k2 * p3.x - p1.y + k1 * p1.x).toDouble / (k1 - k2)
+            val yM: Double = xM * k1 + p1.y - k1 * p1.x
+            Pos(xM.round.toInt, yM.round.toInt)
     
+    // This function should be improved; flipCorner should not have to be specified
     def getOrientation: Int =
-
-        var orientation = 1
-        //orientation *= {if a.x < b.x then 1 else -1}
-        //orientation *= {if c.isLeftOfPlane(a, b) then 1 else -1}
-        //orientation *= {if b.y < c.y && c.x < b.x && b.x < c.x then -1 else 1}
-
+        var orientation = {if flipCorner then -1 else 1}
         orientation *= {if c.isLeftOfPlane(a, c) then -1 else 1}
         orientation *= {if c.y > a.y then 1 else -1}
-
         orientation
-
-        //orientation *= {if b.x < c.x then 1 else -1}
-        //orientation *= {if b.y > a.y && b.y > c.y then 1 else -1}
-
-        //println("o")
-        //println(orientation)
-        //orientation
     
     def draw(): Unit =
         // Draws the base
@@ -131,7 +125,6 @@ case class ThickLine(a: Pos, b: Pos, c: Pos, width: Int, graphics: Graphics, col
         pixelWindow.line(b.x, b.y, c.x, c.y, color, width)
 
         val orientation = getOrientation
-
         val (h1, h2) = getCorners(a, b, orientation)
         val (q1, q2) = getCorners(b, c, orientation)
         val intersect: Pos = getIntersectionPoint(h1, h2, q1, q2)
@@ -139,8 +132,8 @@ case class ThickLine(a: Pos, b: Pos, c: Pos, width: Int, graphics: Graphics, col
         // Fills the gap
         val t1 = new Triangle(h2, intersect, b, graphics)
         val t2 = new Triangle(q1, intersect, b, graphics)
-        t1.fill(Graphics.Colors.red)
-        t2.fill(Graphics.Colors.green)
+        t1.fill(Graphics.Colors.black)
+        t2.fill(Graphics.Colors.black)
 
         //pixelWindow.line(h1.x, h1.y, h2.x, h2.y, Graphics.Colors.red)
         //pixelWindow.line(q1.x, q1.y, q2.x, q2.y, Graphics.Colors.blue)

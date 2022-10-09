@@ -1,1 +1,14 @@
 This is a document where you can write ideas that you have!
+
+
+
+Ideas:
+
+
+
+
+Known bugs (that aren't critical):
+    - If the turn of a ThickLine is too steep, the extra padding that is added could fall outside of the screen
+    - The orientation of the padding of ThickLine should be correct every time - a developer should never have to manually set flipCorner
+    - isLeftOfPlane in Pos can cause a division by 0
+
