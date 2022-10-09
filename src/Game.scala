@@ -38,6 +38,20 @@ class Game:
 
         graphics.drawWorld()
 
+        val stations: Array[Station] = Array(
+            Station("Parliament", Pos(100, 200), Graphics.Colors.red,
+                    (-30, 0), 12, Array("red-polygon"), (-10, 0)),
+
+            Station("Anna Book Arena", Pos(600, 600), Graphics.Colors.white,
+                    (0, 30), 16, Array("red-polygon", "blue-polygon", "yellow-A"), (-5, 50)),
+            
+            Station("Wit's End", Pos(700, 300), Graphics.Colors.blue,
+                    (-30, 0), 12, Array("blue-polygon"), (15, 0)),
+        )
+
+        // Add Singapore
+
+
     
     /** Procedure that prints the start message to the screen */
     def startMessage(): Unit = println(s"${title} started.")
