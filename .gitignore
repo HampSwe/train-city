@@ -5,3 +5,5 @@
 .scala-build
 .vscode
 personal_notes.txt
+target/
+project/

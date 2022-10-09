@@ -14,6 +14,19 @@ trait Shape:
     def fill(color: JColor): Unit
 
 
+/** A class that represents an arbitrary polygon */
+case class Polygon(center: Pos, radius: Int, vertices: Int, graphics: Graphics) extends Shape:
+    val pixelWindow = graphics.pixelWindow
+
+    override def draw(color: JColor): Unit =
+
+        
+
+        ???
+
+    override def fill(color: JColor): Unit = ???
+
+
 /** A class that represents a 2D Triangle */
 case class Triangle(p1: Pos, p2: Pos, p3: Pos, graphics: Graphics) extends Shape:
     val pixelWindow = graphics.pixelWindow
