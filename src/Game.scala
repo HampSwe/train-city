@@ -62,8 +62,8 @@ class Game:
 
         // Creates the red line
         val redLine: MetroLine = new MetroLine(stations(0), stations(1),
-                        Array(Pos(100, 300), Pos(300, 300), Pos(400, 400), Pos(500, 400), Pos(550, 450)),
-                        redLineStops, Graphics.Colors.red)
+                        Array(Pos(100+20, 300-80), Pos(300+20, 300-80), Pos(400+20, 400-80), Pos(500+20, 400-80), Pos(550+20, 450-80)),
+                        Array(false, false, true, false, false), redLineStops, Graphics.Colors.red)
         
         graphics.drawMetroLine(redLine)
 

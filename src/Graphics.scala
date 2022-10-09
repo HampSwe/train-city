@@ -24,7 +24,10 @@ object Graphics:
         val background = new JColor(255, 255, 255)
         val foreground = new JColor(0, 0, 0)
         val river = new JColor(86, 154, 255)
+        val redLine = new JColor(251, 0, 7)
 
+    val riverWidth: Int = 28
+    val metroLineWidth: Int = 10
 
 /** This class performs all the graphical operations on a CityWindow */
 class Graphics(
@@ -56,7 +59,7 @@ class Graphics(
 
     /** A procedure that draws the background river */
     def drawRiver(): Unit =
-        val width = 28
+        val width = riverWidth
 
         // An array of the ThickLines that make up the river
         val lines: Array[ThickLine] = Array(
@@ -78,16 +81,20 @@ class Graphics(
 
 
     /** Draws the specified MetroLine */
-    def drawMetroLine(metroLine: MetroLine): Unit = 
-        val numberOfEdges = metroLine.edges.length
+    def drawMetroLine(metroLine: MetroLine): Unit =
+        val edges = metroLine.edges
+        val numberOfEdges = edges.length
+        var thickLine: ThickLine = null
+        var flippedCorner: Boolean = false
 
         for i <- 0 until numberOfEdges - 2 do
-            println(metroLine.edges(i))
-
+            flippedCorner = {if metroLine.flippedCorners(i + 1) then true else false}
+            thickLine = new ThickLine(edges(i), edges(i + 1), edges(i + 2), metroLineWidth, this, metroLine.color, flipCorner = flippedCorner)
+            thickLine.draw()
     
     // This procedure for anti-aliasing is incredibly inefficient and is only used for testing
     def simpleAntiAlias(): Unit =
-        // Currently skips the peremiter (which should be supported later)
+        // Currently skips the perimeter (which should be supported later)
         val xRange = 1 until cityWindow.width - 1
         val yRange = 1 until cityWindow.height - 1
         var i = 0
