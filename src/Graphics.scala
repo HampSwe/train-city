@@ -23,6 +23,7 @@ object Graphics:
         val blue = new JColor(0, 0, 255)
         val background = new JColor(255, 255, 255)
         val foreground = new JColor(0, 0, 0)
+        val river = new JColor(86, 154, 255)
 
 
 /** This class performs all the graphical operations on a CityWindow */
@@ -39,23 +40,29 @@ class Graphics(
     /** Initializes the world */
     def drawWorld(): Unit =
 
+        drawRiver()
+
+        //val p1 = Pos(100, 100)
+        //val p2 = Pos(300, 100)
+        //val p3 = Pos(400, 300)
+        //val width = 10
+
+        //val thickLine = new ThickLine(p1, p2, p3, width, this, Colors.black, offSet = 0, flipCorner = false)
+        //thickLine.draw()
+
+    /** A procedure that draws a wide line */
+    def drawWideLine(p1: Pos, p2: Pos, width: Int, color: JColor): Unit =
+        pixelWindow.line(p1.x, p1.y, p2.x, p2.y, color, width)
+
+    /** A procedure that draws the background river */
+    def drawRiver(): Unit =
         val p1 = Pos(100, 100)
         val p2 = Pos(300, 100)
         val p3 = Pos(400, 300)
-        val width = 10
+        val width = 30
 
-        //val p1 = Pos(100, 100)
-        //val p2 = Pos(200, 200)
-        //val p3 = Pos(500, 200)
-        //val width = 30
-
-        val thickLine = new ThickLine(p1, p2, p3, width, this, Colors.black, offSet = 0, flipCorner = false)
-        thickLine.draw()
-
-        //simpleAntiAlias()
-
-    def drawWideLine(p1: Pos, p2: Pos, width: Int, color: JColor): Unit =
-        pixelWindow.line(p1.x, p1.y, p2.x, p2.y, color, width)
+        val line1 = new ThickLine(p1, p2, p3, width, this, Colors.river, offSet = 0, flipCorner = false)
+        line1.draw()
 
     
     // This procedure is incredibly inefficient and is only used for testing
