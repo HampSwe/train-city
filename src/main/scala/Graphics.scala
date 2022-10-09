@@ -101,7 +101,7 @@ class Graphics(
         drawStops()
 
 
-    // This procedure for anti-aliasing is incredibly inefficient and is only used for testing
+    /** This procedure for anti-aliasing is incredibly inefficient and is only used for testing */
     def simpleAntiAlias(): Unit =
         // Currently skips the perimeter (which should be supported later)
         val xRange = 1 until cityWindow.width - 1

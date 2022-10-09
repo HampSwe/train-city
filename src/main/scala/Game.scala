@@ -18,6 +18,7 @@ object Game:
     /** Calculates the height of the window in pixels*/
     val height: Int = (width * aspectRatio).round.toInt
 
+/** This class handles everything in the game.*/
 class Game:
     import Game.*
 
