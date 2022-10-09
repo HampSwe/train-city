@@ -23,6 +23,7 @@ The project uses a library called [PixelWindow](https://fileadmin.cs.lth.se/pgk/
 But, we use it anyways.
 
 The project was inspired by https://www.reddit.com/r/TransitDiagrams/.
+
 The vector illustrations are made by @TågMeister
 
 Feel free to contribute in any shape or form!
