@@ -77,6 +77,13 @@ class Graphics(
             lines(i).draw()
 
 
+    /** Draws the specified MetroLine */
+    def drawMetroLine(metroLine: MetroLine): Unit = 
+        val numberOfEdges = metroLine.edges.length
+
+        for i <- 0 until numberOfEdges - 2 do
+            println(metroLine.edges(i))
+
     
     // This procedure for anti-aliasing is incredibly inefficient and is only used for testing
     def simpleAntiAlias(): Unit =

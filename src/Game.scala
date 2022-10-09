@@ -65,7 +65,7 @@ class Game:
                         Array(Pos(100, 300), Pos(300, 300), Pos(400, 400), Pos(500, 400), Pos(550, 450)),
                         redLineStops, Graphics.Colors.red)
         
-        
+        graphics.drawMetroLine(redLine)
 
 
         // Add Singapore

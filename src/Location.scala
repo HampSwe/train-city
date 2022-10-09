@@ -8,11 +8,11 @@ import java.awt.Color as JColor
 abstract class Location(name: String,
                         position: Pos,
                         color: JColor,
-                        textDisplacement: (Int, Int),
+                        textDisplacement: (Int, Int)
                         ):
+    
 
-    def init(): Unit = ???
-
+    def init(): Unit = println("Initialized")
 
 // Make Symbol to a class
 
@@ -22,7 +22,9 @@ case class Station(name: String, position: Pos, color: JColor, textDisplacement:
     
     var metroLines: Array[MetroLine] = Array()
 
+    override def init(): Unit = println("Initialized Station")
+
 case class Stop(name: String, position: Pos, textDisplacement: (Int, Int), color: JColor)
                     extends Location(name, position, color, textDisplacement):
     
-    ???
+    override def init(): Unit = println("Initialized Stop")
