@@ -9,7 +9,8 @@
 
 package traincity
 import java.awt.Color as JColor
-import javax.swing.text.StyledEditorKit.BoldAction
+
+// Never call pixelWindow. directly! Add a method in graphics instead...
 
 object Graphics:
 
@@ -39,21 +40,35 @@ class Graphics(
     def drawWorld(): Unit =
         //pixelWindow.fill(10, 10, 100, 100, Colors.green)
 
-        val p1 = Pos(10, 10)
-        val p2 = Pos(50, 70)
-
         //drawWideLine(p1, p2, 30, Colors.black)
         //pixelWindow.line(p1.x, p1.y, p2.x, p2.y, Colors.red)
 
-
+        /*
         val t = new Triangle(Pos(10, 10), Pos(10, 300), Pos(500, 50), this)
         t.draw(Colors.red)
         Thread.sleep(2000)
         t.fill(Colors.blue)
-    
+        */
+
+        val p1 = Pos(400, 400)
+        val p2 = Pos(300, 300)
+        val p3 = Pos(300, 100)
+        val width = 20
+
+        val thickLine = new ThickLine(p1, p2, p3, width, this, Colors.black)
+        thickLine.draw()
+
 
     def drawWideLine(p1: Pos, p2: Pos, width: Int, color: JColor): Unit =
         pixelWindow.line(p1.x, p1.y, p2.x, p2.y, color, width)
 
-
 // Add anti-aliasing!
+
+
+case class ThickLine(p1: Pos, p2: Pos, p3: Pos, width: Int, graphics: Graphics, color: JColor):
+    import introprog.PixelWindow
+    val pixelWindow = graphics.pixelWindow
+    
+    def draw(): Unit =
+        pixelWindow.line(p1.x, p1.y, p2.x, p2.y, color, width)
+        pixelWindow.line(p2.x, p2.y, p3.x, p3.y, color, width)
