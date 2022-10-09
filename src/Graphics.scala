@@ -58,6 +58,7 @@ class Graphics(
     def drawRiver(): Unit =
         val width = 28
 
+        // An array of the ThickLines that make up the river
         val lines: Array[ThickLine] = Array(
             new ThickLine(Pos(0, 400), Pos(200, 400), Pos(300, 300), width, this, Colors.river, offSet = 0, flipCorner = false),
             new ThickLine(Pos(420, 715), Pos(420, 690), Pos(300, 570), width, this, Colors.river, offSet = 0, flipCorner = false),
