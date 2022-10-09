@@ -20,8 +20,6 @@ case class Polygon(center: Pos, radius: Int, vertices: Int, graphics: Graphics) 
 
     override def draw(color: JColor): Unit =
 
-        
-
         ???
 
     override def fill(color: JColor): Unit = ???

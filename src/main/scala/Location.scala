@@ -5,6 +5,7 @@
 package traincity
 import java.awt.Color as JColor
 
+/* This is a base class for Stations and Stops*/
 abstract class Location(name: String,
                         position: Pos,
                         color: JColor,
