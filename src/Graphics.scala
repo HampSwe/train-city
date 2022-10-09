@@ -62,7 +62,14 @@ class Graphics(
             new ThickLine(Pos(0, 400), Pos(200, 400), Pos(300, 300), width, this, Colors.river, offSet = 0, flipCorner = false),
             new ThickLine(Pos(420, 715), Pos(420, 690), Pos(300, 570), width, this, Colors.river, offSet = 0, flipCorner = false),
             new ThickLine(Pos(420, 690), Pos(300, 570), Pos(300, 300), width, this, Colors.river, offSet = 0, flipCorner = true),
-            new ThickLine(Pos(300, 570), Pos(300, 250), Pos(380, 170), width, this, Colors.river, offSet = 0, flipCorner = true)
+            new ThickLine(Pos(300, 570), Pos(300, 250), Pos(380, 170), width, this, Colors.river, offSet = 0, flipCorner = true),
+            new ThickLine(Pos(300, 250), Pos(380, 170), Pos(480, 170), width, this, Colors.river, offSet = 0, flipCorner = true),
+            new ThickLine(Pos(380, 170), Pos(480, 170), Pos(560, 250), width, this, Colors.river, offSet = 0, flipCorner = true),
+            new ThickLine(Pos(480, 170), Pos(560, 250), Pos(630, 250), width, this, Colors.river, offSet = 0, flipCorner = true), //intersection
+            new ThickLine(Pos(560, 250), Pos(630, 250), Pos(680, 200), width, this, Colors.river, offSet = 0, flipCorner = false),
+            new ThickLine(Pos(630, 250), Pos(680, 200), Pos(680, 0), width, this, Colors.river, offSet = 0, flipCorner = false),
+            new ThickLine(Pos(560, 250), Pos(630, 250), Pos(850, 470), width, this, Colors.river, offSet = 0, flipCorner = true),
+            new ThickLine(Pos(630, 250), Pos(850, 470), Pos(1000, 470), width, this, Colors.river, offSet = 0, flipCorner = true),
         )
 
         for i <- 0 until lines.length do
@@ -70,7 +77,7 @@ class Graphics(
 
 
     
-    // This procedure is incredibly inefficient and is only used for testing
+    // This procedure for anti-aliasing is incredibly inefficient and is only used for testing
     def simpleAntiAlias(): Unit =
         // Currently skips the peremiter (which should be supported later)
         val xRange = 1 until cityWindow.width - 1
@@ -110,6 +117,8 @@ class Graphics(
  * 
  * If the edge doesn't appear, you can manually set flipCorner to true.
  * If the edge appears slightly off, you can change offSet to a different value
+ * 
+ * It seems as if all the lines in the diagram sofar are 45 degrees, which makes a lot of this code redundant...
 */
 case class ThickLine(a: Pos, b: Pos, c: Pos, width: Int, 
                     graphics: Graphics, color: JColor,
