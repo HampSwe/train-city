@@ -62,7 +62,7 @@ class Graphics(
             new ThickLine(Pos(0, 400), Pos(200, 400), Pos(300, 300), width, this, Colors.river, offSet = 0, flipCorner = false),
             new ThickLine(Pos(420, 715), Pos(420, 690), Pos(300, 570), width, this, Colors.river, offSet = 0, flipCorner = false),
             new ThickLine(Pos(420, 690), Pos(300, 570), Pos(300, 300), width, this, Colors.river, offSet = 0, flipCorner = true),
-            new ThickLine(Pos(300, 570), Pos(300, 250), Pos(350, 200), width, this, Colors.river, offSet = 0, flipCorner = true)
+            new ThickLine(Pos(300, 570), Pos(300, 250), Pos(380, 170), width, this, Colors.river, offSet = 0, flipCorner = true)
         )
 
         for i <- 0 until lines.length do
