@@ -4,9 +4,21 @@
 
 package traincity
 
-abstract class Location(name: String, position: Pos, metroLines: MetroLine):
-    def hi(): Unit = println("hi")
+abstract class Location(name: String,
+                        position: Pos, 
+                        metroLines: Array[MetroLine],
+                        textDisplacement: (Int, Int)):
 
-case class Station(name: String, position: Pos, metroLines: MetroLine) extends Location(name, position, metroLines):
+    def init(): Unit = ???
+
+case class Station(name: String, position: Pos, metroLines: Array[MetroLine], textDisplacement: (Int, Int),
+                    textSize: Int, symbol: String)
+                    extends Location(name, position, metroLines, textDisplacement):
     
-    def hello(): Unit = hi()
+    ???
+
+case class Stop(name: String, position: Pos, metroLines: Array[MetroLine],
+                    textDisplacement: (Int, Int))
+                    extends Location(name, position, metroLines, textDisplacement):
+    
+    ???
