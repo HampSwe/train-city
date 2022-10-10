@@ -28,6 +28,7 @@ object Graphics:
 
     val riverWidth: Int = 28
     val metroLineWidth: Int = 10
+    val stopSize = 8
 
 /** This class performs all the graphical operations on a CityWindow */
 class Graphics(
@@ -98,9 +99,17 @@ class Graphics(
             val poly: Polygon = new Polygon(Pos(200, 200), 30, 5, this)
             poly.fill(Colors.black)
 
-            val circle: Circle = new Circle(Pos(200, 500), 8, 1000, this)
-            //circle.draw(Colors.black)
-            circle.fill(Colors.black)
+            var circle: Circle = null
+            var perimeter: Circle = null
+            val stops = metroLine.stops
+
+            for stop <- stops do
+                perimeter = new Circle(stop.position, stopSize, 1000, this)
+                circle = new Circle(stop.position, stopSize - 3, 1000, this)
+                perimeter.fill(Colors.white)
+                circle.fill(metroLine.color)
+                
+
     
         drawBackground()
         drawStops()
