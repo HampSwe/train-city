@@ -1,8 +1,8 @@
 This is a document where you can write ideas that you have!
 
-
 Ideas:
-
+    - Add trains!
+    - Add characters that can be controlled
 
 Improvements:
     - PixelWindow should never be called directly: add a wrapper function located in Graphics
