@@ -54,11 +54,11 @@ class Game:
 
         // Creates the stops on the red line
         val redLineStops: Array[Stop] = Array(
-            new Stop("Weston Road", Pos(250, 220), (0, -10), Graphics.Colors.red),
+            new Stop("Weston Road", Pos(250, 220), (3, -21), Graphics.Colors.red),
             new Stop("Bridge Plaza", Pos(390, 220), (0, 10), Graphics.Colors.red),
-            new Stop("Grand Square", Pos(480, 280), (-20, 0), Graphics.Colors.red),
-            new Stop("Bremerton Alley", Pos(580, 350), (0, -10), Graphics.Colors.red),
-            new Stop("National Museum of Art", Pos(650, 350), (0, 10), Graphics.Colors.red),
+            new Stop("Grand Square", Pos(480, 280), (-40, 2), Graphics.Colors.red),
+            new Stop("Bremerton Alley", Pos(580, 350), (3, 10), Graphics.Colors.red),
+            new Stop("Museum of Art", Pos(650, 350), (5, -21), Graphics.Colors.red), // should be anmed "National \n Museum of Art", but I have not added line-breaking capabilities to drawText()
         )
 
         // Creates the red line

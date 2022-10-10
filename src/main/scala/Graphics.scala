@@ -29,6 +29,7 @@ object Graphics:
     val riverWidth: Int = 28
     val metroLineWidth: Int = 10
     val stopSize = 8
+    val stopTextSize = 10
 
 /** This class performs all the graphical operations on a CityWindow */
 class Graphics(
@@ -96,7 +97,7 @@ class Graphics(
                 thickLine.draw()
         
         def drawStops(): Unit =
-            val poly: Polygon = new Polygon(Pos(200, 200), 30, 5, this)
+            val poly: Polygon = new Polygon(Pos(200, 100), 30, 5, this)
             poly.fill(Colors.black)
 
             var circle: Circle = null
@@ -108,6 +109,10 @@ class Graphics(
                 circle = new Circle(stop.position, stopSize - 3, 1000, this)
                 perimeter.fill(Colors.white)
                 circle.fill(metroLine.color)
+            
+                // Add line break capabilities
+                pixelWindow.drawText(stop.name, stop.position.x + stop.textDisplacement(0) - stop.name.length * 3,
+                                    stop.position.y + stop.textDisplacement(1), Colors.black, stopTextSize, 1, "Arial")
                 
 
     
