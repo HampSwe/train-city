@@ -97,9 +97,6 @@ class Graphics(
                 thickLine.draw()
         
         def drawStops(): Unit =
-            val poly: Polygon = new Polygon(Pos(200, 100), 30, 5, this)
-            poly.fill(Colors.black)
-
             var circle: Circle = null
             var perimeter: Circle = null
             val stops = metroLine.stops
@@ -114,17 +111,27 @@ class Graphics(
                 pixelWindow.drawText(stop.name, stop.position.x + stop.textDisplacement(0) - stop.name.length * 3,
                                     stop.position.y + stop.textDisplacement(1), Colors.black, stopTextSize, 1, "Arial")
                 
-
-
-        def drawStations(): Unit =
-            println("hej")
-
-        
-    
         drawBackground()
         drawStops()
-        drawStations()
 
+
+    def drawStations(stations: Array[Station]): Unit =
+        for station <- stations do
+
+            if station.symbols.contains("red-polygon") then
+                val pentagon: Polygon = new Polygon(station.position, 15, 5, this)
+                pentagon.fill(station.color)
+                pixelWindow.drawText("1", station.position.x + 4, station.position.y - 18, Colors.white, 12, 1, "Arial")
+
+            pixelWindow.drawText(station.name, station.position.x + station.textDisplacement(0),
+                                station.position.y + station.textDisplacement(1), Colors.black, station.textSize, 1, "Arial")
+
+
+    def drawLargeStation(position: Pos, recWidth: Int = 30, recHeight: Int = 24, border: Int = 3): Unit =
+        val borderRec: Rectangle = new Rectangle(position, recWidth, recHeight, this)
+        borderRec.fill(Colors.black)
+        val rec: Rectangle = new Rectangle(Pos(position.x + border, position.y - border), recWidth - border * 2, recHeight - border * 2, this)
+        rec.fill(Colors.white)
 
     /** This procedure for anti-aliasing is incredibly inefficient and is only used for testing */
     def simpleAntiAlias(): Unit =

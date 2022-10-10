@@ -6,6 +6,8 @@ Ideas:
 
 Improvements:
     - PixelWindow should never be called directly: add a wrapper function located in Graphics
+    - Give Anna Book Arena rounded corners
+    - Store data about the map in a seperate file
 
 Known bugs (that aren't critical):
     - If the turn of a ThickLine is too steep, the extra padding that is added could fall outside of the screen

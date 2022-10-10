@@ -42,33 +42,54 @@ class Game:
 
         // Creates the stations
         val stations: Array[Station] = Array(
-            new Station("Parliament", Pos(100, 200), Graphics.Colors.red,
-                    (-30, 0), 12, Array("red-polygon"), (-10, 0)),
+            new Station("Parliament", Pos(107, 229), Graphics.Colors.red,
+                    (-22, 5), 10, Array("red-polygon"), (-10, 0)),
 
-            new Station("Anna Book Arena", Pos(600, 600), Graphics.Colors.white,
-                    (0, 30), 16, Array("red-polygon", "blue-polygon", "yellow-A"), (-5, 50)),
+            new Station("Anna Book Arena", Pos(682, 410), Graphics.Colors.white,
+                    (-29, 9), 12, Array("red-polygon", "blue-polygon", "yellow-A"), (-5, 50)),
             
             new Station("Wit's End", Pos(700, 300), Graphics.Colors.blue,
-                    (-30, 0), 12, Array("blue-polygon"), (15, 0)),
+                    (-30, 0), 10, Array("blue-polygon"), (15, 0)),
         )
 
         // Creates the stops on the red line
         val redLineStops: Array[Stop] = Array(
-            new Stop("", Pos(140, 220), (0, 0), Graphics.Colors.red), // Start point, at Parliament
+            new Stop("", Pos(140, 220), (0, 0), Graphics.Colors.red), // First stop, at Parliament
             new Stop("Weston Road", Pos(250, 220), (3, -21), Graphics.Colors.red),
             new Stop("Bridge Plaza", Pos(390, 220), (0, 10), Graphics.Colors.red),
             new Stop("Grand Square", Pos(480, 280), (-40, 2), Graphics.Colors.red),
             new Stop("Bremerton Alley", Pos(580, 350), (3, 10), Graphics.Colors.red),
             new Stop("Museum of Art", Pos(650, 350), (5, -21), Graphics.Colors.red), // should be anmed "National \n Museum of Art", but I have not added line-breaking capabilities to drawText()
+            new Stop("", Pos(700, 400), (0, 0), Graphics.Colors.red), // Last stop, at Anna Book arena
         )
-
         // Creates the red line
         val redLine: MetroLine = new MetroLine(stations(0), stations(1),
                         Array(Pos(140, 220), Pos(420, 220), Pos(550, 350), Pos(650, 350), Pos(700, 400)),
                         Array(false, false, true, false, false), redLineStops, Graphics.Colors.red)
+
+
+        // Creates the stops on the blue line
+        val blueLineStops: Array[Stop] = Array(
+            new Stop("", Pos(140, 220), (0, 0), Graphics.Colors.red), // First stop, at Anna Book arena
+            new Stop("Cascade", Pos(250, 220), (3, -21), Graphics.Colors.red),
+            new Stop("Prague Road", Pos(580, 350), (3, 10), Graphics.Colors.red),
+            new Stop("", Pos(700, 400), (0, 0), Graphics.Colors.red), // Last stop, at Wit's End
+        )
+        // Creates the blue line
+        val blueLine: MetroLine = new MetroLine(stations(0), stations(1),
+                        Array(Pos(140, 220), Pos(420, 220), Pos(550, 350), Pos(650, 350), Pos(700, 400)),
+                        Array(false, false, true, false, false), redLineStops, Graphics.Colors.red)
+
         
-        // Draws the red line
+        // Draws all the MetroLines
         graphics.drawMetroLine(redLine)
+        graphics.drawMetroLine(blueLine)
+
+        // Draws all stations (their names and symbols)
+        graphics.drawStations(stations)
+
+        // Draws Anna Book Arena
+        graphics.drawLargeStation(stations(1).position)
 
         // Add Singapore
 

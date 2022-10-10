@@ -40,14 +40,30 @@ case class Polygon(start: Pos, var side: Double, vertices: Int, graphics: Graphi
     override def fill(color: JColor): Unit =
         val oldSide = side
         var tmpSide = oldSide.toDouble
-        val precision = 1
-        val width = 3
+        val precision = 3
+        var width = 1
 
         for i <- 1 to (side * precision).toInt do
             this.draw(color, width = width)
             tmpSide -= 1D / precision.toDouble
             side = tmpSide.round.toInt
+    
+            if i == 1 then
+                width += 1
+
         side = oldSide
+
+        // Brute force the pixels that aren't colored. This should be replaced with a better fill-algorithm, preferably A*
+        for x <- 0 until side.toInt do
+            for y <- 0 until (side * 2).toInt do
+                if pixelWindow.getPixel(start.x + x, start.y - y) != color then
+                    if pixelWindow.getPixel(start.x + x + 1, start.y - y) == color
+                        && pixelWindow.getPixel(start.x + x - 1, start.y - y) == color
+                        && pixelWindow.getPixel(start.x + x, start.y - y + 1) == color
+                        && pixelWindow.getPixel(start.x + x, start.y - y - 1) == color then
+                            pixelWindow.setPixel(start.x + x, start.y - y, color)
+
+
 
 
 
@@ -77,6 +93,37 @@ case class Circle(center: Pos, var radius: Double, edges: Int = 100, graphics: G
             this.draw(color, width = width)
             radius -= 1
         radius = oldRadius
+
+
+
+/** A case class that represents a RoundRectangle. Not implemented yet.
+ * RoundRectangles will represent larger stations, such as Anna Book Arena */
+case class RoundRectangle(start: Pos, width: Int, height: Int, graphics: Graphics) extends Shape:
+    val pixelWindow = graphics.pixelWindow
+
+    /** Draws a circle */
+    override def draw(color: JColor, width: Int = 1): Unit =
+        ???
+
+    /** Fills a circle */
+    override def fill(color: JColor): Unit =
+        ???
+
+
+/** A case class that represents a Rectangle */
+case class Rectangle(start: Pos, recWidth: Int, recHeight: Int, graphics: Graphics) extends Shape:
+    val pixelWindow = graphics.pixelWindow
+
+    /** Draws a circle */
+    override def draw(color: JColor, width: Int = 1): Unit =
+        pixelWindow.line(start.x, start.y, start.x + recWidth - 1, start.y, color)
+        pixelWindow.line(start.x + (recWidth - 1), start.y, start.x + (recWidth - 1), start.y - (recHeight - 1),  color)
+        pixelWindow.line(start.x + (recWidth - 1), start.y - (recHeight - 1), start.x, start.y - (recHeight - 1), color)
+        pixelWindow.line(start.x, start.y - (recHeight - 1), start.x, start.y, color)
+
+    /** Fills a circle */
+    override def fill(color: JColor): Unit =
+        pixelWindow.fill(start.x, start.y - recHeight + 1, recWidth, recHeight, color)
 
 
 /** A class that represents a 2D Triangle */
