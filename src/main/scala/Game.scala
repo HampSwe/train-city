@@ -91,10 +91,11 @@ class Game:
         // Draws all stations (their names and symbols)
         graphics.drawStations(stations)
 
+        // Draws the line to Singapore
+        graphics.drawSingapore()
+
         // Draws Anna Book Arena
         graphics.drawLargeStation(stations(1).position)
-
-        // Add Singapore
 
 
     

@@ -27,6 +27,7 @@ object Graphics:
         val river = new JColor(86, 154, 255)
         val redLine = new JColor(251, 0, 7)
         val blueLine = new JColor(0, 2, 247)
+        val yellowLine = new JColor(250, 102, 4)
 
     val riverWidth: Int = 28
     val metroLineWidth: Int = 10
@@ -137,6 +138,17 @@ class Graphics(
         borderRec.fill(Colors.black)
         val rec: Rectangle = new Rectangle(Pos(position.x + border, position.y - border), recWidth - border * 2, recHeight - border * 2, this)
         rec.fill(Colors.white)
+    
+    
+    /** This should not be "hard coded" */
+    def drawSingapore(): Unit =
+        val rec: Rectangle = new Rectangle(Pos(686, 406), 314, 4, this)
+        rec.fill(Colors.yellowLine)
+
+        pixelWindow.drawText("to Singapore S", 920, 412, Colors.yellowLine, 10, 1, "Arial")
+        val circle: Circle = new Circle(Pos(900, 400), 10, edges = 1000, this)
+        circle.fill(Colors.yellowLine)
+
 
     /** This procedure for anti-aliasing is incredibly inefficient and is only used for testing */
     def simpleAntiAlias(): Unit =
