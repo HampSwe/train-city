@@ -64,9 +64,6 @@ case class Polygon(start: Pos, var side: Double, vertices: Int, graphics: Graphi
                             pixelWindow.setPixel(start.x + x, start.y - y, color)
 
 
-
-
-
 /** A case class that represents a circle */
 case class Circle(center: Pos, var radius: Double, edges: Int = 100, graphics: Graphics) extends Shape:
     val pixelWindow = graphics.pixelWindow
