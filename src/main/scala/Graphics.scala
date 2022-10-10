@@ -50,11 +50,6 @@ class Graphics(
 
         drawRiver()
 
-        //val p1 = Pos(100, 100)
-        //val p2 = Pos(300, 100)
-        //val p3 = Pos(400, 300)
-        //val width = 10
-
         //val thickLine = new ThickLine(p1, p2, p3, width, this, Colors.black, offSet = 0, flipCorner = false)
         //thickLine.draw()
 
@@ -138,6 +133,7 @@ class Graphics(
         borderRec.fill(Colors.black)
         val rec: Rectangle = new Rectangle(Pos(position.x + border, position.y - border), recWidth - border * 2, recHeight - border * 2, this)
         rec.fill(Colors.white)
+        this.drawAnnaBookSymbols()
     
     
     /** This should not be "hard coded" */
@@ -146,9 +142,26 @@ class Graphics(
         rec.fill(Colors.yellowLine)
 
         pixelWindow.drawText("to Singapore S", 920, 412, Colors.yellowLine, 10, 1, "Arial")
-        val circle: Circle = new Circle(Pos(900, 400), 10, edges = 1000, this)
+        val circle: Circle = new Circle(Pos(907, 418), 6, edges = 1000, this)
         circle.fill(Colors.yellowLine)
 
+        pixelWindow.drawText("A", 903, 411, Colors.white, 10, 1, "Arial")
+
+
+    /** This should not be "hard coded" */
+    def drawAnnaBookSymbols(): Unit =
+        val pentagonRed: Polygon = new Polygon(Pos(665, 460), 15, 5, this)
+        val pentagonBlue: Polygon = new Polygon(Pos(695, 460), 15, 5, this)
+        val circle: Circle = new Circle(Pos(732, 450), 10, edges = 1000, this)
+
+        pentagonRed.fill(Colors.redLine)
+        pentagonBlue.fill(Colors.blueLine)
+        circle.fill(Colors.yellowLine)
+
+        pixelWindow.drawText(s"${1}", 665 + 4, 460 - 18, Colors.white, 12, 1, "Arial")
+        pixelWindow.drawText(s"${2}", 695 + 4, 460 - 18, Colors.white, 12, 1, "Arial")
+        pixelWindow.drawText("A", 728, 441, Colors.white, 14, 1, "Arial")
+    
 
     /** This procedure for anti-aliasing is incredibly inefficient and is only used for testing */
     def simpleAntiAlias(): Unit =
