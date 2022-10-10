@@ -115,7 +115,7 @@ class Graphics(
         drawBackground()
         drawStops()
 
-
+    /** Draws all stations */
     def drawStations(stations: Array[Station]): Unit =
         for station <- stations do
 
@@ -129,6 +129,7 @@ class Graphics(
                                 station.position.y + station.textDisplacement(1), Colors.black, station.textSize, 1, font)
 
 
+    /** Draws a large station */
     def drawLargeStation(position: Pos, recWidth: Int = 31, recHeight: Int = 25, border: Int = 3): Unit =
         val borderRec: Rectangle = new Rectangle(position, recWidth, recHeight, this)
         borderRec.fill(Colors.black)
@@ -194,8 +195,6 @@ class Graphics(
                     pixelWindow.setPixel(x, y, newColor)
 
         println("Finished anti-aliasing")
-
-// Add anti-aliasing!
 
 
 /** This class handles ThickLines - that is, a wide line between three points.
