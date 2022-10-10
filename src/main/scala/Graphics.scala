@@ -21,10 +21,12 @@ object Graphics:
         val red = new JColor(255, 0, 0)
         val green = new JColor(0, 255, 0)
         val blue = new JColor(0, 0, 255)
+
         val background = new JColor(255, 255, 255)
         val foreground = new JColor(0, 0, 0)
         val river = new JColor(86, 154, 255)
         val redLine = new JColor(251, 0, 7)
+        val blueLine = new JColor(0, 2, 247)
 
     val riverWidth: Int = 28
     val metroLineWidth: Int = 10
@@ -120,16 +122,17 @@ class Graphics(
     def drawStations(stations: Array[Station]): Unit =
         for station <- stations do
 
-            if station.symbols.contains("red-polygon") then
+            // Symbol-handling should be improved
+            if station.symbols.contains("red-polygon") || station.symbols.contains("blue-polygon") then
                 val pentagon: Polygon = new Polygon(station.position, 15, 5, this)
                 pentagon.fill(station.color)
-                pixelWindow.drawText("1", station.position.x + 4, station.position.y - 18, Colors.white, 12, 1, "Arial")
+                pixelWindow.drawText(s"${station.id}", station.position.x + 4, station.position.y - 18, Colors.white, 12, 1, "Arial")
 
             pixelWindow.drawText(station.name, station.position.x + station.textDisplacement(0),
                                 station.position.y + station.textDisplacement(1), Colors.black, station.textSize, 1, "Arial")
 
 
-    def drawLargeStation(position: Pos, recWidth: Int = 30, recHeight: Int = 24, border: Int = 3): Unit =
+    def drawLargeStation(position: Pos, recWidth: Int = 31, recHeight: Int = 25, border: Int = 3): Unit =
         val borderRec: Rectangle = new Rectangle(position, recWidth, recHeight, this)
         borderRec.fill(Colors.black)
         val rec: Rectangle = new Rectangle(Pos(position.x + border, position.y - border), recWidth - border * 2, recHeight - border * 2, this)

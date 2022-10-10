@@ -11,7 +11,6 @@ abstract class Location(name: String,
                         color: JColor,
                         textDisplacement: (Int, Int)
                         ):
-    
 
     def init(): Unit = println("Initialized")
 
@@ -19,7 +18,7 @@ abstract class Location(name: String,
 
 /** This is a class for the game's Stations*/
 case class Station(name: String, position: Pos, color: JColor, textDisplacement: (Int, Int), 
-                    textSize: Int, symbols: Array[String], symbolsDisplacement: (Int, Int))
+                    textSize: Int, symbols: Array[String], symbolsDisplacement: (Int, Int), id: Int)
                     extends Location(name, position, color, textDisplacement):
     
     var metroLines: Array[MetroLine] = Array()

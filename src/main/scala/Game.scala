@@ -42,46 +42,46 @@ class Game:
 
         // Creates the stations
         val stations: Array[Station] = Array(
-            new Station("Parliament", Pos(107, 229), Graphics.Colors.red,
-                    (-22, 5), 10, Array("red-polygon"), (-10, 0)),
+            new Station("Parliament", Pos(107, 229), Graphics.Colors.redLine,
+                    (-22, 5), 10, Array("red-polygon"), (0, 0), 1),
 
-            new Station("Anna Book Arena", Pos(682, 410), Graphics.Colors.white,
-                    (-29, 9), 12, Array("red-polygon", "blue-polygon", "yellow-A"), (-5, 50)),
+            new Station("Anna Book Arena", Pos(681, 410), Graphics.Colors.white,
+                    (-29, 9), 12, Array("red-polygon", "blue-polygon", "yellow-A"), (-5, 50), 0),
             
-            new Station("Wit's End", Pos(700, 300), Graphics.Colors.blue,
-                    (-30, 0), 10, Array("blue-polygon"), (15, 0)),
+            new Station("Wit's End", Pos(890+16, 150+9), Graphics.Colors.blueLine,
+                    (-56-16, -6-9), 10, Array("blue-polygon"), (85, 20), 2),
         )
 
         // Creates the stops on the red line
         val redLineStops: Array[Stop] = Array(
-            new Stop("", Pos(140, 220), (0, 0), Graphics.Colors.red), // First stop, at Parliament
-            new Stop("Weston Road", Pos(250, 220), (3, -21), Graphics.Colors.red),
-            new Stop("Bridge Plaza", Pos(390, 220), (0, 10), Graphics.Colors.red),
-            new Stop("Grand Square", Pos(480, 280), (-40, 2), Graphics.Colors.red),
-            new Stop("Bremerton Alley", Pos(580, 350), (3, 10), Graphics.Colors.red),
-            new Stop("Museum of Art", Pos(650, 350), (5, -21), Graphics.Colors.red), // should be anmed "National \n Museum of Art", but I have not added line-breaking capabilities to drawText()
-            new Stop("", Pos(700, 400), (0, 0), Graphics.Colors.red), // Last stop, at Anna Book arena
+            new Stop("", Pos(140, 220), (0, 0), Graphics.Colors.redLine), // First stop, at Parliament
+            new Stop("Weston Road", Pos(250, 220), (3, -21), Graphics.Colors.redLine),
+            new Stop("Bridge Plaza", Pos(390, 220), (0, 10), Graphics.Colors.redLine),
+            new Stop("Grand Square", Pos(480, 280), (-40, 2), Graphics.Colors.redLine),
+            new Stop("Bremerton Alley", Pos(580, 350), (3, 10), Graphics.Colors.redLine),
+            new Stop("Museum of Art", Pos(650, 350), (5, -21), Graphics.Colors.redLine), // should be anmed "National \n Museum of Art", but I have not added line-breaking capabilities to drawText()
+            new Stop("", Pos(700, 400), (0, 0), Graphics.Colors.redLine), // Last stop, at Anna Book arena
         )
         // Creates the red line
         val redLine: MetroLine = new MetroLine(stations(0), stations(1),
                         Array(Pos(140, 220), Pos(420, 220), Pos(550, 350), Pos(650, 350), Pos(700, 400)),
                         Array(false, false, true, false, false), Array(0, 0, 0, 0, 0),
-                        redLineStops, Graphics.Colors.red)
+                        redLineStops, Graphics.Colors.redLine)
 
 
         // Creates the stops on the blue line
         val blueLineStops: Array[Stop] = Array(
-            new Stop("", Pos(700, 400), (0, 0), Graphics.Colors.blue), // First stop, at Anna Book arena
-            new Stop("Cascade", Pos(850, 370), (3, -21), Graphics.Colors.blue),
-            new Stop("Prague Road", Pos(880, 250), (3, 10), Graphics.Colors.blue),
-            new Stop("", Pos(880, 150), (0, 0), Graphics.Colors.blue), // Last stop, at Wit's End
+            new Stop("", Pos(700, 400-4), (0, 0), Graphics.Colors.blueLine), // First stop, at Anna Book arena
+            new Stop("Cascade", Pos(865, 371), (31, 1), Graphics.Colors.blueLine),
+            new Stop("Prague Road", Pos(890, 250), (-42, -7), Graphics.Colors.blueLine),
+            new Stop("", Pos(890, 150), (0, 0), Graphics.Colors.blueLine), // Last stop, at Wit's End
         )
         // Creates the blue line
         val blueLine: MetroLine = new MetroLine(stations(1), stations(2),
-                        Array(Pos(700, 400), Pos(840, 400), Pos(890, 350), Pos(890, 150)),
+                        Array(Pos(700, 400-4), Pos(840, 400-4), Pos(890, 350-4), Pos(890, 150-4)),
                         //Array(Pos(890, 150), Pos(890, 350), Pos(840, 400), Pos(700, 400)),
                         Array(false, false, false, false, false), Array(0, 1, 0, 0, 0),
-                        blueLineStops, Graphics.Colors.blue)
+                        blueLineStops, Graphics.Colors.blueLine)
 
         
         // Draws all the MetroLines
