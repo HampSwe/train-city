@@ -10,7 +10,7 @@ object MetroLine:
 
 /** This class represents a MetroLine */
 case class MetroLine(startStation: Station, endStation: Station,
-                    edges: Array[Pos], flippedCorners: Array[Boolean],
+                    edges: Array[Pos], flippedCorners: Array[Boolean], offSets: Array[Int],
                     stops: Array[Stop], color: JColor
 ):
     def init(): Unit = println("Initialized")

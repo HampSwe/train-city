@@ -90,10 +90,12 @@ class Graphics(
             val numberOfEdges = edges.length
             var thickLine: ThickLine = null
             var flippedCorner: Boolean = false
+            var offSet: Int = 0
 
             for i <- 0 until numberOfEdges - 2 do
-                flippedCorner = {if metroLine.flippedCorners(i + 1) then true else false}
-                thickLine = new ThickLine(edges(i), edges(i + 1), edges(i + 2), metroLineWidth, this, metroLine.color, flipCorner = flippedCorner)
+                flippedCorner = metroLine.flippedCorners(i + 1)
+                offSet = metroLine.offSets(i)
+                thickLine = new ThickLine(edges(i), edges(i + 1), edges(i + 2), metroLineWidth, this, metroLine.color, offSet = offSet, flipCorner = flippedCorner)
                 thickLine.draw()
         
         def drawStops(): Unit =

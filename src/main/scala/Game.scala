@@ -65,20 +65,23 @@ class Game:
         // Creates the red line
         val redLine: MetroLine = new MetroLine(stations(0), stations(1),
                         Array(Pos(140, 220), Pos(420, 220), Pos(550, 350), Pos(650, 350), Pos(700, 400)),
-                        Array(false, false, true, false, false), redLineStops, Graphics.Colors.red)
+                        Array(false, false, true, false, false), Array(0, 0, 0, 0, 0),
+                        redLineStops, Graphics.Colors.red)
 
 
         // Creates the stops on the blue line
         val blueLineStops: Array[Stop] = Array(
-            new Stop("", Pos(140, 220), (0, 0), Graphics.Colors.red), // First stop, at Anna Book arena
-            new Stop("Cascade", Pos(250, 220), (3, -21), Graphics.Colors.red),
-            new Stop("Prague Road", Pos(580, 350), (3, 10), Graphics.Colors.red),
-            new Stop("", Pos(700, 400), (0, 0), Graphics.Colors.red), // Last stop, at Wit's End
+            new Stop("", Pos(700, 400), (0, 0), Graphics.Colors.blue), // First stop, at Anna Book arena
+            new Stop("Cascade", Pos(850, 370), (3, -21), Graphics.Colors.blue),
+            new Stop("Prague Road", Pos(880, 250), (3, 10), Graphics.Colors.blue),
+            new Stop("", Pos(880, 150), (0, 0), Graphics.Colors.blue), // Last stop, at Wit's End
         )
         // Creates the blue line
-        val blueLine: MetroLine = new MetroLine(stations(0), stations(1),
-                        Array(Pos(140, 220), Pos(420, 220), Pos(550, 350), Pos(650, 350), Pos(700, 400)),
-                        Array(false, false, true, false, false), redLineStops, Graphics.Colors.red)
+        val blueLine: MetroLine = new MetroLine(stations(1), stations(2),
+                        Array(Pos(700, 400), Pos(840, 400), Pos(890, 350), Pos(890, 150)),
+                        //Array(Pos(890, 150), Pos(890, 350), Pos(840, 400), Pos(700, 400)),
+                        Array(false, false, false, false, false), Array(0, 1, 0, 0, 0),
+                        blueLineStops, Graphics.Colors.blue)
 
         
         // Draws all the MetroLines
