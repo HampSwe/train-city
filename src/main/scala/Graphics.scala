@@ -33,6 +33,7 @@ object Graphics:
     val metroLineWidth: Int = 10
     val stopSize = 8
     val stopTextSize = 10
+    val font = "Arial"
 
 /** This class performs all the graphical operations on a CityWindow */
 class Graphics(
@@ -109,7 +110,7 @@ class Graphics(
             
                 // Add line break capabilities
                 pixelWindow.drawText(stop.name, stop.position.x + stop.textDisplacement(0) - stop.name.length * 3,
-                                    stop.position.y + stop.textDisplacement(1), Colors.black, stopTextSize, 1, "Arial")
+                                    stop.position.y + stop.textDisplacement(1), Colors.black, stopTextSize, 1, font)
                 
         drawBackground()
         drawStops()
@@ -122,10 +123,10 @@ class Graphics(
             if station.symbols.contains("red-polygon") || station.symbols.contains("blue-polygon") then
                 val pentagon: Polygon = new Polygon(station.position, 15, 5, this)
                 pentagon.fill(station.color)
-                pixelWindow.drawText(s"${station.id}", station.position.x + 4, station.position.y - 18, Colors.white, 12, 1, "Arial")
+                pixelWindow.drawText(s"${station.id}", station.position.x + 4, station.position.y - 18, Colors.white, 12, 1, font)
 
             pixelWindow.drawText(station.name, station.position.x + station.textDisplacement(0),
-                                station.position.y + station.textDisplacement(1), Colors.black, station.textSize, 1, "Arial")
+                                station.position.y + station.textDisplacement(1), Colors.black, station.textSize, 1, font)
 
 
     def drawLargeStation(position: Pos, recWidth: Int = 31, recHeight: Int = 25, border: Int = 3): Unit =
@@ -141,11 +142,11 @@ class Graphics(
         val rec: Rectangle = new Rectangle(Pos(686, 406), 314, 4, this)
         rec.fill(Colors.yellowLine)
 
-        pixelWindow.drawText("to Singapore S", 920, 412, Colors.yellowLine, 10, 1, "Arial")
+        pixelWindow.drawText("to Singapore S", 920, 412, Colors.yellowLine, 10, 1, font)
         val circle: Circle = new Circle(Pos(907, 418), 6, edges = 1000, this)
         circle.fill(Colors.yellowLine)
 
-        pixelWindow.drawText("A", 903, 411, Colors.white, 10, 1, "Arial")
+        pixelWindow.drawText("A", 903, 411, Colors.white, 10, 1, font)
 
 
     /** This should not be "hard coded" */
@@ -158,9 +159,9 @@ class Graphics(
         pentagonBlue.fill(Colors.blueLine)
         circle.fill(Colors.yellowLine)
 
-        pixelWindow.drawText(s"${1}", 665 + 4, 460 - 18, Colors.white, 12, 1, "Arial")
-        pixelWindow.drawText(s"${2}", 695 + 4, 460 - 18, Colors.white, 12, 1, "Arial")
-        pixelWindow.drawText("A", 728, 441, Colors.white, 14, 1, "Arial")
+        pixelWindow.drawText(s"${1}", 665 + 4, 460 - 18, Colors.white, 12, 1, font)
+        pixelWindow.drawText(s"${2}", 695 + 4, 460 - 18, Colors.white, 12, 1, font)
+        pixelWindow.drawText("A", 728, 441, Colors.white, 14, 1, font)
     
 
     /** This procedure for anti-aliasing is incredibly inefficient and is only used for testing */
