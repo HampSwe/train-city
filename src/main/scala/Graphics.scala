@@ -115,9 +115,15 @@ class Graphics(
                                     stop.position.y + stop.textDisplacement(1), Colors.black, stopTextSize, 1, "Arial")
                 
 
+
+        def drawStations(): Unit =
+            println("hej")
+
+        
     
         drawBackground()
         drawStops()
+        drawStations()
 
 
     /** This procedure for anti-aliasing is incredibly inefficient and is only used for testing */

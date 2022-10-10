@@ -54,6 +54,7 @@ class Game:
 
         // Creates the stops on the red line
         val redLineStops: Array[Stop] = Array(
+            new Stop("", Pos(140, 220), (0, 0), Graphics.Colors.red), // Start point, at Parliament
             new Stop("Weston Road", Pos(250, 220), (3, -21), Graphics.Colors.red),
             new Stop("Bridge Plaza", Pos(390, 220), (0, 10), Graphics.Colors.red),
             new Stop("Grand Square", Pos(480, 280), (-40, 2), Graphics.Colors.red),
