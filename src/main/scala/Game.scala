@@ -97,6 +97,11 @@ class Game:
         // Draws Anna Book Arena
         graphics.drawLargeStation(stations(1).position)
 
+        // Makes sure that the game doesn't quit immediately
+        print("Press enter to quit: ")
+        scala.io.StdIn.readLine()
+
+
 
     
     /** Procedure that prints the start message to the screen */
